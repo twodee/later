@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import { translations } from './i18n';
 
-const UNITS = ['seconds', 'minutes', 'hours', 'days', 'years'];
+const UNITS = ['seconds', 'minutes', 'hours', 'days', 'years', 'score'];
 
 const UNIT_MS = {
   seconds: 1000,
@@ -10,6 +10,7 @@ const UNIT_MS = {
   hours: 60 * 60 * 1000,
   days: 24 * 60 * 60 * 1000,
   years: 365.25 * 24 * 60 * 60 * 1000,
+  score: 20 * 365.25 * 24 * 60 * 60 * 1000,
 };
 
 function toLocalDatetimeValue(date) {
