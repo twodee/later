@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import './App.css'
-import { translations } from './i18n'
+import { useState } from 'react';
+import './App.css';
+import { translations } from './i18n';
 
-const UNITS = ['seconds', 'minutes', 'hours', 'days', 'years']
+const UNITS = ['seconds', 'minutes', 'hours', 'days', 'years'];
 
 const UNIT_MS = {
   seconds: 1000,
@@ -10,39 +10,39 @@ const UNIT_MS = {
   hours: 60 * 60 * 1000,
   days: 24 * 60 * 60 * 1000,
   years: 365.25 * 24 * 60 * 60 * 1000,
-}
+};
 
 function toLocalDatetimeValue(date) {
-  const pad = (n) => String(n).padStart(2, '0')
-  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
 }
 
 function App() {
-  const [origin, setOrigin] = useState(toLocalDatetimeValue(new Date()))
-  const [offsets, setOffsets] = useState([{ id: 1, amount: 1, unit: 'hours' }])
-  const [nextId, setNextId] = useState(2)
-  const [lang, setLang] = useState('en')
+  const [origin, setOrigin] = useState(toLocalDatetimeValue(new Date()));
+  const [offsets, setOffsets] = useState([{ id: 1, amount: 1, unit: 'hours' }]);
+  const [nextId, setNextId] = useState(2);
+  const [lang, setLang] = useState('en');
 
-  const t = translations[lang]
+  const t = translations[lang];
 
   function addOffset() {
-    setOffsets([...offsets, { id: nextId, amount: 1, unit: 'hours' }])
-    setNextId(nextId + 1)
+    setOffsets([...offsets, { id: nextId, amount: 1, unit: 'hours' }]);
+    setNextId(nextId + 1);
   }
 
   function removeOffset(id) {
-    setOffsets(offsets.filter((o) => o.id !== id))
+    setOffsets(offsets.filter((o) => o.id !== id));
   }
 
   function updateOffset(id, field, value) {
-    setOffsets(offsets.map((o) => (o.id === id ? { ...o, [field]: value } : o)))
+    setOffsets(offsets.map((o) => (o.id === id ? { ...o, [field]: value } : o)));
   }
 
   const resultMs =
     new Date(origin).getTime() +
-    offsets.reduce((sum, o) => sum + Number(o.amount) * UNIT_MS[o.unit], 0)
+    offsets.reduce((sum, o) => sum + Number(o.amount) * UNIT_MS[o.unit], 0);
 
-  const result = isNaN(resultMs) ? null : new Date(resultMs)
+  const result = isNaN(resultMs) ? null : new Date(resultMs);
 
   return (
     <div className="app">
@@ -115,7 +115,7 @@ function App() {
         </div>
       </section>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
