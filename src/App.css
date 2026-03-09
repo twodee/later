@@ -157,3 +157,7 @@ h1 {
   color: #fff;
   border-color: #222;
 }
+
+.lang-button--active:hover {
+  background: #444;
+}

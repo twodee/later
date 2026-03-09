@@ -18,7 +18,7 @@ export const translations = {
     },
   },
   es: {
-    appTitle: 'Later',
+    appTitle: 'Luego',
     langLabel: 'Cambiar a español',
     origin: 'Origen',
     offsets: 'Intervalos',
