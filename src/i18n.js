@@ -15,6 +15,9 @@ export const translations = {
       hours: 'hours',
       days: 'days',
       years: 'years',
+      decades: 'decades',
+      score: 'score',
+      centuries: 'centuries',
     },
   },
   es: {
@@ -33,6 +36,9 @@ export const translations = {
       hours: 'horas',
       days: 'días',
       years: 'años',
+      decades: 'décadas',
+      score: 'veintena',
+      centuries: 'siglos',
     },
   },
 };
