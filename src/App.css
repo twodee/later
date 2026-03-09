@@ -127,3 +127,33 @@ h1 {
 .copy-button:active {
   transform: scale(0.9);
 }
+
+.lang-switcher {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 4px;
+}
+
+.lang-button {
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  color: #555;
+  letter-spacing: 0.04em;
+}
+
+.lang-button:hover {
+  background: #eee;
+}
+
+.lang-button--active {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+}
