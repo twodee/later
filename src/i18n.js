@@ -1,0 +1,38 @@
+export const translations = {
+  en: {
+    appTitle: 'Later',
+    langLabel: 'Switch to English',
+    origin: 'Origin',
+    offsets: 'Offsets',
+    result: 'Result',
+    addOffset: '+ Add offset',
+    removeOffset: 'Remove offset',
+    copyResult: 'Copy result',
+    locale: 'en-US',
+    units: {
+      seconds: 'seconds',
+      minutes: 'minutes',
+      hours: 'hours',
+      days: 'days',
+      years: 'years',
+    },
+  },
+  es: {
+    appTitle: 'Later',
+    langLabel: 'Cambiar a español',
+    origin: 'Origen',
+    offsets: 'Intervalos',
+    result: 'Resultado',
+    addOffset: '+ Agregar intervalo',
+    removeOffset: 'Eliminar intervalo',
+    copyResult: 'Copiar resultado',
+    locale: 'es-ES',
+    units: {
+      seconds: 'segundos',
+      minutes: 'minutos',
+      hours: 'horas',
+      days: 'días',
+      years: 'años',
+    },
+  },
+}

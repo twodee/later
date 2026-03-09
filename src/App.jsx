@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import { translations } from './i18n'
 
 const UNITS = ['seconds', 'minutes', 'hours', 'days', 'years']
 
@@ -20,6 +21,9 @@ function App() {
   const [origin, setOrigin] = useState(toLocalDatetimeValue(new Date()))
   const [offsets, setOffsets] = useState([{ id: 1, amount: 1, unit: 'hours' }])
   const [nextId, setNextId] = useState(2)
+  const [lang, setLang] = useState('en')
+
+  const t = translations[lang]
 
   function addOffset() {
     setOffsets([...offsets, { id: nextId, amount: 1, unit: 'hours' }])
@@ -42,10 +46,23 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Later</h1>
+      <div className="lang-switcher">
+        {Object.keys(translations).map((code) => (
+          <button
+            key={code}
+            onClick={() => setLang(code)}
+            className={`lang-button${lang === code ? ' lang-button--active' : ''}`}
+            aria-label={translations[code].langLabel}
+          >
+            {code.toUpperCase()}
+          </button>
+        ))}
+      </div>
+
+      <h1>{t.appTitle}</h1>
 
       <section className="section">
-        <label className="label">Origin</label>
+        <label className="label">{t.origin}</label>
         <input
           type="datetime-local"
           step="1"
@@ -56,7 +73,7 @@ function App() {
       </section>
 
       <section className="section">
-        <label className="label">Offsets</label>
+        <label className="label">{t.offsets}</label>
         {offsets.map((offset) => (
           <div key={offset.id} className="offset-row">
             <input
@@ -71,26 +88,26 @@ function App() {
               className="unit-select"
             >
               {UNITS.map((u) => (
-                <option key={u} value={u}>{u}</option>
+                <option key={u} value={u}>{t.units[u]}</option>
               ))}
             </select>
-            <button onClick={() => removeOffset(offset.id)} className="remove-button" aria-label="Remove offset">✕</button>
+            <button onClick={() => removeOffset(offset.id)} className="remove-button" aria-label={t.removeOffset}>✕</button>
           </div>
         ))}
-        <button onClick={addOffset} className="add-button">+ Add offset</button>
+        <button onClick={addOffset} className="add-button">{t.addOffset}</button>
       </section>
 
       <section className="section result-section">
-        <label className="label">Result</label>
+        <label className="label">{t.result}</label>
         <div className="result-row">
           <div className="result">
-            {result ? result.toLocaleString() : '—'}
+            {result ? result.toLocaleString(t.locale) : '—'}
           </div>
           {result && (
             <button
               className="copy-button"
-              onClick={() => navigator.clipboard.writeText(result.toLocaleString())}
-              aria-label="Copy result"
+              onClick={() => navigator.clipboard.writeText(result.toLocaleString(t.locale))}
+              aria-label={t.copyResult}
             >
               <span className="material-icons" style={{ fontSize: '1.2rem' }}>content_copy</span>
             </button>
