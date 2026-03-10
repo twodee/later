@@ -8,6 +8,7 @@ export const translations = {
     addOffset: '+ Add offset',
     removeOffset: 'Remove offset',
     copyResult: 'Copy result',
+    toggleTheme: 'Toggle theme',
     locale: 'en-US',
     units: {
       seconds: 'seconds',
@@ -27,6 +28,7 @@ export const translations = {
     addOffset: '+ Agregar intervalo',
     removeOffset: 'Eliminar intervalo',
     copyResult: 'Copiar resultado',
+    toggleTheme: 'Cambiar tema',
     locale: 'es-ES',
     units: {
       seconds: 'segundos',
