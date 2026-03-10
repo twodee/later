@@ -8,11 +8,6 @@ const UNIT_MS = {
   seconds: 1000,
   minutes: 60 * 1000,
   hours: 60 * 60 * 1000,
-  days: 24 * 60 * 60 * 1000,
-  years: 365.25 * 24 * 60 * 60 * 1000,
-  decades: 10 * 365.25 * 24 * 60 * 60 * 1000,
-  score: 20 * 365.25 * 24 * 60 * 60 * 1000,
-  centuries: 100 * 365.25 * 24 * 60 * 60 * 1000,
 };
 
 function toLocalDatetimeValue(date) {
@@ -41,25 +36,46 @@ function App() {
     setOffsets(offsets.map((o) => (o.id === id ? { ...o, [field]: value } : o)));
   }
 
-  const resultMs =
-    new Date(origin).getTime() +
-    offsets.reduce((sum, o) => sum + Number(o.amount) * UNIT_MS[o.unit], 0);
+  const YEARS_PER_UNIT = { years: 1, decades: 10, score: 20, centuries: 100 };
 
-  const result = isNaN(resultMs) ? null : new Date(resultMs);
+  function computeResult() {
+    const date = new Date(origin);
+    if (isNaN(date.getTime())) return null;
+
+    let totalYears = 0;
+    let totalDays = 0;
+    let totalMs = 0;
+    for (const o of offsets) {
+      const amount = Number(o.amount);
+      if (o.unit in YEARS_PER_UNIT) {
+        totalYears += amount * YEARS_PER_UNIT[o.unit];
+      } else if (o.unit === 'days') {
+        totalDays += amount;
+      } else {
+        totalMs += amount * UNIT_MS[o.unit];
+      }
+    }
+
+    date.setFullYear(date.getFullYear() + totalYears);
+    date.setDate(date.getDate() + totalDays);
+    return new Date(date.getTime() + totalMs);
+  }
+
+  const result = computeResult();
 
   return (
     <div className="app">
       <div className="lang-switcher">
-        {Object.keys(translations).map((code) => (
-          <button
-            key={code}
-            onClick={() => setLang(code)}
-            className={`lang-button${lang === code ? ' lang-button--active' : ''}`}
-            aria-label={translations[code].langLabel}
-          >
-            {code.toUpperCase()}
-          </button>
-        ))}
+        <select
+          value={lang}
+          onChange={(e) => setLang(e.target.value)}
+          className="lang-select"
+          aria-label="Language"
+        >
+          {Object.keys(translations).map((code) => (
+            <option key={code} value={code}>{code.toUpperCase()}</option>
+          ))}
+        </select>
       </div>
 
       <h1>{t.appTitle}</h1>

@@ -55,14 +55,22 @@ h1 {
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 6px;
+  box-sizing: border-box;
+  height: 38px;
 }
 
 .unit-select {
   flex: 1;
+}
+
+.unit-select,
+.lang-select {
   padding: 8px 10px;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 6px;
+  box-sizing: border-box;
+  height: 38px;
 }
 
 .remove-button {
@@ -100,6 +108,7 @@ h1 {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;
+  position: relative;
 }
 
 .result-row {
@@ -118,6 +127,9 @@ h1 {
   background: none;
   cursor: pointer;
   transition: transform 0.15s ease;
+  position: absolute;
+  top: 12px;
+  right: 12px;
 }
 
 .copy-button:hover {
@@ -132,32 +144,8 @@ h1 {
   position: fixed;
   top: 16px;
   right: 16px;
-  display: flex;
-  gap: 4px;
 }
 
-.lang-button {
-  padding: 4px 10px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background: #fff;
-  cursor: pointer;
-  color: #555;
-  letter-spacing: 0.04em;
-}
-
-.lang-button:hover {
-  background: #eee;
-}
-
-.lang-button--active {
-  background: #222;
-  color: #fff;
-  border-color: #222;
-}
-
-.lang-button--active:hover {
-  background: #444;
+.lang-select {
+  min-width: 120px;
 }
