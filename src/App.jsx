@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import { translations } from './i18n';
 
@@ -23,6 +23,21 @@ function App() {
   const [offsets, setOffsets] = useState([{ id: 1, amount: 1, unit: 'hours' }]);
   const [nextId, setNextId] = useState(2);
   const [lang, setLang] = useState('en');
+  const [theme, setTheme] = useState(() => {
+    const stored = localStorage.getItem('theme');
+    if (stored) return stored;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
+
+  useEffect(() => {
+    document.body.classList.toggle('dark', theme === 'dark');
+  }, [theme]);
+
+  function toggleTheme() {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  }
 
   const t = translations[lang];
 
@@ -48,6 +63,13 @@ function App() {
   return (
     <div className="app">
       <div className="lang-switcher">
+        <button
+          className="theme-toggle"
+          onClick={toggleTheme}
+          aria-label={t.toggleTheme}
+        >
+          <span className="material-icons">{theme === 'light' ? 'dark_mode' : 'light_mode'}</span>
+        </button>
         {Object.keys(translations).map((code) => (
           <button
             key={code}
